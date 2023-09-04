@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { IGetMoviesResult, getMovies } from "../api";
+import { IGetMoviesResult, getPlayingMovies, getPopularMovies } from "../api";
 import { useQuery } from "react-query";
 import BigBanner from "../Components/Banner";
-import { makeImagePath } from "./util";
+import Slider from "../Components/Slider";
 
 const Wrapper = styled.div`
   height: 200vh;
@@ -13,7 +13,7 @@ const Loader = styled.div``;
 export default function Home() {
   const { data, isLoading } = useQuery<IGetMoviesResult>(
     ["movies", "nowPlaying"],
-    getMovies
+    getPlayingMovies
   );
   return (
     <>
@@ -23,6 +23,7 @@ export default function Home() {
         ) : (
           <BigBanner data={data}></BigBanner>
         )}
+        <Slider></Slider>
       </Wrapper>
     </>
   );
